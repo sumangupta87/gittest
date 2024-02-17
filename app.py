@@ -77,21 +77,6 @@ PINECONE_ENVIRONMENT = os.getenv("PINE_CONE_ENV")
 api_key = os.environ.get('PINECONE_API_KEY') or PINECONE_API_KEY
 environment = os.environ.get('PINECONE_ENVIRONMENT') or PINECONE_ENVIRONMENT
 
-# configure client
-pc = Pinecone(api_key=api_key)
-index_name = os.getenv("PINE_CONE_INDEX")
-# connect to index
-index = pc.Index(index_name)
-time.sleep(1)
-# view index stats
-index.describe_index_stats()
-
-  
-def upsert_embeddings_to_pinecone(index, embeddings):
-    index.upsert(vectors=[(str(id), embedding) for id, embedding in enumerate(embeddings)])
-
-upsert_embeddings_to_pinecone(index, dataset)
-
 # ...................................................................
 
 
@@ -112,7 +97,7 @@ for result in xc['matches']:
 
 llm = ChatOpenAI()
 
-'''
+
 doc_db = embedding_db()
 
 def retrieval_answer(query):
@@ -135,9 +120,8 @@ def main():
             answer = retrieval_answer(text_input)
             st.success(answer)
 
-
+print("I am happy to be here!")
 
 if __name__ == "__main__":
     main()
 
-'''
